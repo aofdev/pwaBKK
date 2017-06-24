@@ -18,7 +18,7 @@
             <router-link to="/login" activeClass="active" tag="li" v-if="!isLoggedInLocal"><a>Login</a></router-link>
             <router-link to="/register" activeClass="active" tag="li" v-if="!isLoggedInLocal"><a>Register</a></router-link>
             <li class="dropdown" v-if="isLoggedInLocal">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i>  {{ userEmail }} <span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i>  {{ userName }} <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="#" @click="logoutLocal"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
               </ul>
@@ -43,20 +43,28 @@
       isLoggedInLocal() {
         return this.$store.getters.isLoggedIn;
       },
-      userEmail() {
+      userName() {
         if (this.isLoggedInLocal) {
-          return this.$store.getters.currentUser.email;
+            if (this.$store.getters.currentUser.name){
+              return this.$store.getters.currentUser.name;
+            }else{
+              return this.$store.getters.currentUser.email;
+            }
         } else {
           return '';
         }
       }
     },
     methods: {
-      ...mapActions(['logout']),
+      ...mapActions(['logout', 'listenToPostList']),
       logoutLocal() {
         this.logout();
       }
+    },
+      created() {
+      this.listenToPostList();
     }
+
   }
 
 </script>

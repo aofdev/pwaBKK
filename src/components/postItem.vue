@@ -4,19 +4,19 @@
       <div class="card">
         <div class="card-image">
           <img class="img-responsive" src="https://www.chinatouradvisors.com/images/nopic_s.jpg">
-          <span class="card-title">Post</span>
+          <span class="card-title">{{ item.topic }}</span>
         </div>
 
         <div class="card-content">
-          <p>Detail</p>
+          <p>{{ item.detail }}</p>
         </div>
 
         <div class="card-action">
-          <a style="color: blueviolet" href="#" target="new_blank"><i class="fa fa-user-circle" aria-hidden="true"></i>
-              user</a>
+          <a style="color: blueviolet" href="#" ><i class="fa fa-user-circle" aria-hidden="true"></i>
+            เขียนโดย: {{ item.created }}</a>
 
-          <a class="pull-right" href="#" target="new_blank"><i class="fa fa-pencil" aria-hidden="true"></i>
-              edit</a>
+          <router-link to="link" class="pull-right"  v-if="item.userUid == userId"><i class="fa fa-pencil" aria-hidden="true"></i>
+              แก้ไข</router-link>
         </div>
       </div>
     </div>
@@ -24,6 +24,30 @@
 </template>
 
 <script>
+  export default{
+    props: ['item'],
+    data(){
+      return {
+        link:{
+          name: 'EditPost',
+          params:{
+            id: this.item.id
+          },
+          query:{
+            dataTopic: this.item.topic, dataDetail: this.item.detail,dataKey: this.item.keyId
+          }
+        }
+      }
+    },
+    computed:{
+      userId(){
+        return this.$store.getters.currentUser.uid;
+      }
+    },
+    methods:{
+
+    }
+  }
 
 </script>
 

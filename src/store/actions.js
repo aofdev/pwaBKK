@@ -1,4 +1,4 @@
-import { db, firebaseAuth,providerGoogle,providerFacebook } from '../config/firebaseConfig';
+import { db, firebaseAuth,providerGoogle } from '../config/firebaseConfig';
 
 
 export const registerByEmail = ({commit}, {email, password}) => {
@@ -11,19 +11,13 @@ export const logout = ({commit}) => {
 
 export function loginWithEmail ({commit}, {email, password}) {
   return firebaseAuth().signInWithEmailAndPassword(email, password);
-}
+};
 
 export function loginWithGoogle({commit}) {
  return firebaseAuth().signInWithPopup(providerGoogle).then(function(result) {
     console.log(result);
   }).catch(function(error) {});
-}
-
-export function loginWithFacebook({commit}) {
-  return firebaseAuth().signInWithPopup(providerFacebook).then(function(result) {
-    console.log(result);
-  }).catch(function(error) {});
-}
+};
 
 
 export function listenToPostList({commit}) {
