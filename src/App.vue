@@ -14,8 +14,8 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Login</a></li>
-            <li><a href="#">Register</a></li>
+            <router-link to="/login" activeClass="active" tag="li"><a>Login</a></router-link>
+            <router-link to="/register" activeClass="active" tag="li"><a>Register</a></router-link>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">user <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
@@ -36,3 +36,9 @@
 <script>
 
 </script>
+
+<style>
+  body {
+    background-color: #EEEEEE;
+  }
+</style>
