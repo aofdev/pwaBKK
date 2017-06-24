@@ -9,17 +9,18 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Post Short</a>
+          <a class="navbar-brand" href="/"><b>Post Short</b></a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
-            <router-link to="/login" activeClass="active" tag="li"><a>Login</a></router-link>
-            <router-link to="/register" activeClass="active" tag="li"><a>Register</a></router-link>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">user <span class="caret"></span></a>
+            <router-link to="/createPost" activeClass="active" tag="li" v-if="isLoggedInLocal"><a>เขียนโฟส</a></router-link>
+            <router-link to="/login" activeClass="active" tag="li" v-if="!isLoggedInLocal"><a>Login</a></router-link>
+            <router-link to="/register" activeClass="active" tag="li" v-if="!isLoggedInLocal"><a>Register</a></router-link>
+            <li class="dropdown" v-if="isLoggedInLocal">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i>  {{ userEmail }} <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="#">Logout</a></li>
+                <li><a href="#" @click="logoutLocal"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
               </ul>
             </li>
           </ul>
@@ -34,6 +35,29 @@
   </div>
 </template>
 <script>
+
+
+  import { mapActions } from 'vuex';
+  export default {
+    computed: {
+      isLoggedInLocal() {
+        return this.$store.getters.isLoggedIn;
+      },
+      userEmail() {
+        if (this.isLoggedInLocal) {
+          return this.$store.getters.currentUser.email;
+        } else {
+          return '';
+        }
+      }
+    },
+    methods: {
+      ...mapActions(['logout']),
+      logoutLocal() {
+        this.logout();
+      }
+    }
+  }
 
 </script>
 
