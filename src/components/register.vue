@@ -26,8 +26,14 @@
                 <div class="form-group">
                   <div class="col-lg-10 col-lg-offset-2">
                     <button type="submit" class="btn btn-success" @click.prevent="registerByEmailLocal">register</button>
-                    <button type="button" class="btn btn-success" @click.prevent="registerByGoogle">Google</button>
                     <button type="reset" class="btn btn-default">Clear</button>
+                    <br/><br>
+                    <a class="btn btn-block btn-social btn-google" @click.prevent="registerByGoogle">
+                      <span class="fa fa-google"></span> Sign in with Google
+                    </a>
+                    <!--<a class="btn btn-block btn-social btn-facebook" @click.prevent="registerByFacebook">-->
+                      <!--<span class="fa fa-facebook"></span> Sign in with Facebook-->
+                    <!--</a>-->
 
                   </div>
                 </div>
@@ -43,7 +49,7 @@
 </template>
 
 <script>
-  import {firebaseAuth ,providerGoogle} from '../config/firebaseConfig';
+  import {firebaseAuth ,providerGoogle, providerFacebook} from '../config/firebaseConfig';
   export default {
     data(){
       return {
@@ -64,13 +70,18 @@
         });
       },
       registerByGoogle(){
-
         firebaseAuth().signInWithPopup(providerGoogle).then(function(result) {
           console.log(result);
           this.$router.push({name: 'Home'});
         }).catch(function(error) {});
 
       }
+//      registerByFacebook(){
+//        firebaseAuth().signInWithPopup(providerFacebook).then(function(result) {
+//          console.log(result);
+//          this.$router.push({name: 'Home'});
+//        }).catch(function(error) {});
+//      }
     }
   }
 

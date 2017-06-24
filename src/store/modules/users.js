@@ -26,6 +26,7 @@ const getters = {
     if (state && state.user) {
       return {
         email: state.user.email,
+        name: state.user.displayName,
         emailVerified: state.user.emailVerified,
         uid: state.user.uid
       }
