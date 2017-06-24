@@ -15,7 +15,7 @@
           <a style="color: blueviolet" href="#" ><i class="fa fa-user-circle" aria-hidden="true"></i>
             เขียนโดย: {{ item.created }}</a>
 
-          <router-link to="link" class="pull-right"  v-if="item.userUid == userId"><i class="fa fa-pencil" aria-hidden="true"></i>
+          <router-link :to="link" class="pull-right"  v-if="item.userUid == userId"><i class="fa fa-pencil" aria-hidden="true"></i>
               แก้ไข</router-link>
         </div>
       </div>

@@ -44,3 +44,19 @@ export function insertPost ({commit}, {id,topic,detail,created,userUid}) {
 
   return refdb.update(insert);
 }
+
+export function updatePosts({commit}, {id,topic,detail,created,userUid,keyId}) {
+  let posts = {
+    id:id,
+    topic:topic,
+    detail:detail,
+    created:created,
+    userUid:userUid,
+    keyId: keyId
+  };
+  return db.ref("posts/"+keyId).set(posts);
+}
+
+export function deletePost({commit},{keyId}) {
+  return db.ref("posts/"+keyId).remove();
+}
