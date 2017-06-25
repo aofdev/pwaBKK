@@ -24,8 +24,15 @@
                   </div>
                 </div>
                 <div class="form-group">
+
                   <div class="col-lg-10 col-lg-offset-2">
-                    <button type="submit" class="btn btn-warning" @click.prevent="createPosts">บันทึก</button>
+                      <progress  value="0" max="100" id="uploader"></progress>
+                <input accept="image/*" type="file" value="upload" @change="fileBtn(file, $event)">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-lg-10 col-lg-offset-2">
+                    <button type="submit" class="btn btn-info" v-if="btnUpdate" @click.prevent="createPosts">บันทึก</button>
                     <button type="reset" class="btn btn-default">Clear</button>
 
                   </div>
@@ -42,11 +49,14 @@
 </template>
 
 <script>
+  import { firebaseStorage } from '../config/firebaseConfig';
   export default {
     data(){
       return {
         topic: '',
-        detail: ''
+        detail: '',
+        image:'',
+        btnUpdate: false
       }
     },
     computed:{
@@ -62,13 +72,37 @@
       }
     },
     methods:{
+      fileBtn: function (file, e) {
+        e.preventDefault();
+        const uploader = document.getElementById('uploader');
+        //get file
+        let getFile = e.target.files[0];
+        this.image = getFile.name;
+        //set storage ref
+        let storageRef =  firebaseStorage.ref('posts/'+ getFile.name);
+        //upload file
+        let task = storageRef.put(getFile);
+        this.btnUpdate = true;
+
+        task.on('state_changed',
+          function progress(snapshot) {
+            let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            uploader.value = percentage;
+          },
+          function error(err) {
+          },
+          function complete() {
+          }
+        );
+      },
       createPosts(){
         let posts = {
           id: Math.floor(100000 + Math.random() * 900000),
           topic: this.topic,
           detail: this.detail,
           created: this.userName,
-          userUid: this.userId
+          userUid: this.userId,
+          image: this.image
         };
         this.$store.dispatch('insertPost', posts).then((posts) => {
 

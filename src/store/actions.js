@@ -27,7 +27,7 @@ export function listenToPostList({commit}) {
   });
 }
 
-export function insertPost ({commit}, {id,topic,detail,created,userUid}) {
+export function insertPost ({commit}, {id,topic,detail,created,userUid,image}) {
   const refdb =  db.ref();
   const key = refdb.push().getKey();
   let posts = {
@@ -36,6 +36,7 @@ export function insertPost ({commit}, {id,topic,detail,created,userUid}) {
     detail:detail,
     created:created,
     userUid:userUid,
+    image:image,
     keyId: key
   };
 

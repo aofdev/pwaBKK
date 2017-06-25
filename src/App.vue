@@ -72,5 +72,6 @@
 <style>
   body {
     background-color: #EEEEEE;
+    font-family: 'Kanit', sans-serif;
   }
 </style>
