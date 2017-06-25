@@ -14,13 +14,13 @@
                 <div class="form-group">
                   <label for="inputPost" class="col-lg-2 control-label">ชื่อโฟส</label>
                   <div class="col-lg-10">
-                    <input type="text" class="form-control" id="inputPost" placeholder="ชื่อโฟส" v-model="topic">
+                    <input type="text" class="form-control" id="inputPost" placeholder="ชื่อโฟส" maxlength="30" v-model="topic">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="textarea" class="col-lg-2 control-label">รายละเอียด</label>
                   <div class="col-lg-10">
-                    <textarea type="password" class="form-control" id="textarea" placeholder="รายละเอียด" v-model="detail"></textarea>
+                    <textarea type="password" class="form-control" id="textarea" placeholder="รายละเอียด" maxlength="150" v-model="detail"></textarea>
                   </div>
                 </div>
                 <div class="form-group">
@@ -35,8 +35,24 @@
                   <div class="col-lg-10 col-lg-offset-2">
                     <button type="submit" class="btn btn-warning" @click.prevent="editPosts">แก้ไข</button>
                     <button type="reset" class="btn btn-default">Clear</button>
-                    <button type="button" class="btn btn-danger pull-right" @click.prevent="deletePt"><i class="fa fa-trash-o" aria-hidden="true"></i> ลบ</button>
+                    <button type="button" class="btn btn-danger pull-right" data-toggle="modal" data-target="#deleteModal" ><i class="fa fa-trash-o" aria-hidden="true"></i> ลบ</button>
 
+                    <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
+                            <h4 class="modal-title" id="myModalLabel">ยืนยันการลบโฟส ?</h4>
+                          </div>
+                          <div class="modal-footer">
+                            <center>
+                            <button type="button" class="btn btn-lg btn-default" data-dismiss="modal">ปิด</button>
+                            <button type="button" class="btn btn-lg btn-danger" data-dismiss="modal" @click.prevent="deletePt">ใช่</button>
+                            </center>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </fieldset>

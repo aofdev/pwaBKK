@@ -5,6 +5,7 @@ import Login from '@/components/login'
 import Register from '@/components/register'
 import CreatePost from '@/components/createPost'
 import EditPost from '@/components/editPost'
+import WatchMe from '@/components/watchMe'
 
 Vue.use(Router);
 
@@ -15,5 +16,6 @@ export default new Router({
     { path: '/register',name: 'Register', component: Register},
     { path: '/createPost',name: 'CreatePost', component: CreatePost},
     { path: '/editPost/:id',name: 'EditPost', component: EditPost},
+    { path: '/WatchMe',name: 'WatchMe', component: WatchMe},
   ]
 })

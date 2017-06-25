@@ -14,7 +14,8 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
-            <router-link to="/createPost" activeClass="active" tag="li" v-if="isLoggedInLocal"><a><i class="fa fa-sticky-note" aria-hidden="true"></i> เขียนโฟส</a></router-link>
+            <router-link to="/createPost" activeClass="active" tag="li" v-if="isLoggedInLocal"><a><i class="fa fa-pencil-square-o" aria-hidden="true"></i> เขียนโฟส</a></router-link>
+            <router-link to="/watchMe" activeClass="active" tag="li" v-if="isLoggedInLocal"><a><i class="fa fa-sticky-note" aria-hidden="true"></i> ดูโฟสเรา</a></router-link>
             <router-link to="/login" activeClass="active" tag="li" v-if="!isLoggedInLocal"><a><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></router-link>
             <router-link to="/register" activeClass="active" tag="li" v-if="!isLoggedInLocal"><a><i class="fa fa-registered" aria-hidden="true"></i> Register</a></router-link>
             <li class="dropdown" v-if="isLoggedInLocal">
@@ -74,6 +75,7 @@
 <style>
   body {
     background-color: #EEEEEE;
+    font-size: 14px;
     font-family: 'Kanit', sans-serif;
   }
   .slide-enter-active{

@@ -14,13 +14,13 @@
                 <div class="form-group">
                   <label for="inputPost" class="col-lg-2 control-label">ชื่อโฟส</label>
                   <div class="col-lg-10">
-                    <input type="text" class="form-control" id="inputPost" placeholder="ชื่อโฟส" v-model="topic">
+                    <input type="text" class="form-control" id="inputPost" placeholder="ชื่อโฟส" maxlength="30" v-model="topic">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="textarea" class="col-lg-2 control-label">รายละเอียด</label>
                   <div class="col-lg-10">
-                    <textarea type="password" class="form-control" id="textarea" placeholder="รายละเอียด" v-model="detail"></textarea>
+                    <textarea type="password" class="form-control" id="textarea" placeholder="รายละเอียด" maxlength="150" v-model="detail"></textarea>
                   </div>
                 </div>
                 <div class="form-group">

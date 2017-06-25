@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="col-md-4">
+    <div class="col-md-4" v-if="item.userUid == userId">
       <div class="card">
         <div class="card-image">
-          <img :id="item.id" width="365" height="260px">
+          <img  :id="item.id" width="365" height="260px">
           <span class="card-title"><b>{{ item.topic }}</b></span>
         </div>
 
@@ -15,8 +15,8 @@
           <a style="color: blueviolet" href="#" ><i class="fa fa-user-circle" aria-hidden="true"></i>
             เขียนโดย: {{ item.created }}</a>
 
-          <router-link :to="link" class="pull-right"  v-if="item.userUid == userId"><i class="fa fa-pencil" aria-hidden="true"></i>
-              แก้ไข</router-link>
+          <router-link :to="link" class="pull-right"><i class="fa fa-pencil" aria-hidden="true"></i>
+            แก้ไข</router-link>
         </div>
       </div>
       <br>
