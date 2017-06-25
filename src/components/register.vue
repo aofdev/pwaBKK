@@ -31,9 +31,13 @@
                     <a class="btn btn-block btn-social btn-google" @click.prevent="registerByGoogle">
                       <span class="fa fa-google"></span> Sign in with Google
                     </a>
-                    <!--<a class="btn btn-block btn-social btn-facebook" @click.prevent="registerByFacebook">-->
-                      <!--<span class="fa fa-facebook"></span> Sign in with Facebook-->
-                    <!--</a>-->
+
+                    <a class="btn btn-block btn-social btn-facebook" @click.prevent="registerByFacebook">
+                      <span class="fa fa-facebook"></span> Sign in with Facebook
+                    </a>
+                    <a class="btn btn-block btn-social btn-github" @click.prevent="registerByGithub">
+                      <span class="fa fa-github"></span> Sign in with Github
+                    </a>
 
                   </div>
                 </div>
@@ -49,7 +53,6 @@
 </template>
 
 <script>
-  import {firebaseAuth ,providerGoogle, providerFacebook} from '../config/firebaseConfig';
   export default {
     data(){
       return {
@@ -70,18 +73,26 @@
         });
       },
       registerByGoogle(){
-        firebaseAuth().signInWithPopup(providerGoogle).then(function(result) {
-          console.log(result);
+        this.$store.dispatch('loginWithGoogle').then((user) => {
           this.$router.push({name: 'Home'});
-        }).catch(function(error) {});
-
+        }).catch((error) => {
+          console.log('login error', error);
+        });
+      },
+      registerByFacebook(){
+        this.$store.dispatch('loginWithFacebook').then((user) => {
+          this.$router.push({name: 'Home'});
+        }).catch((error) => {
+          console.log('login error', error);
+        });
+      },
+      registerByGithub(){
+        this.$store.dispatch('loginWithGithub').then((user) => {
+          this.$router.push({name: 'Home'});
+        }).catch((error) => {
+          console.log('login error', error);
+        });
       }
-//      registerByFacebook(){
-//        firebaseAuth().signInWithPopup(providerFacebook).then(function(result) {
-//          console.log(result);
-//          this.$router.push({name: 'Home'});
-//        }).catch(function(error) {});
-//      }
     }
   }
 

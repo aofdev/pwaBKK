@@ -28,9 +28,16 @@
                 <button type="submit" class="btn btn-warning" @click.prevent="loginWithEmailLocal">Submit</button>
                 <button type="reset" class="btn btn-default">Clear</button>
                 <br/><br>
-                <a class="btn btn-block btn-social btn-google" @click.prevent="registerByGoogle">
+                <a class="btn btn-block btn-social btn-google" @click.prevent="loginByGoogle">
                   <span class="fa fa-google"></span> Sign in with Google
                 </a>
+                <a class="btn btn-block btn-social btn-facebook" @click.prevent="loginByFacebook">
+                  <span class="fa fa-facebook"></span> Sign in with Facebook
+                </a>
+                <a class="btn btn-block btn-social btn-github" @click.prevent="loginByGithub">
+                  <span class="fa fa-github"></span> Sign in with Github
+                </a>
+
 
               </div>
             </div>
@@ -64,7 +71,29 @@
         }).catch((error) => {
           console.log('login error', error);
         });
-      }
+      },
+      loginByGoogle(){
+        this.$store.dispatch('loginWithGoogle').then((user) => {
+          this.$router.push({name: 'Home'});
+        }).catch((error) => {
+          console.log('login error', error);
+        });
+      },
+      loginByFacebook(){
+        this.$store.dispatch('loginWithFacebook').then((user) => {
+          this.$router.push({name: 'Home'});
+        }).catch((error) => {
+          console.log('login error', error);
+        });
+      },
+      loginByGithub(){
+        this.$store.dispatch('loginWithGithub').then((user) => {
+          this.$router.push({name: 'Home'});
+        }).catch((error) => {
+          console.log('login error', error);
+        });
+      },
+
     }
   }
 

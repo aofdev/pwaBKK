@@ -1,4 +1,4 @@
-import { db, firebaseAuth,providerGoogle,firebaseStorage } from '../config/firebaseConfig';
+import { db, firebaseAuth,providerGoogle,providerFacebook,providerGithub,firebaseStorage } from '../config/firebaseConfig';
 
 
 export const registerByEmail = ({commit}, {email, password}) => {
@@ -15,6 +15,22 @@ export function loginWithEmail ({commit}, {email, password}) {
 
 export function loginWithGoogle({commit}) {
  return firebaseAuth().signInWithPopup(providerGoogle).then(function(result) {
+    console.log(result);
+  }).catch(function(error) {});
+};
+
+export function loginWithFacebook({commit}) {
+  return firebaseAuth().signInWithPopup(providerFacebook).then(function(result) {
+    console.log(result);
+  }).catch(function(error) {});
+};
+
+export function loginWithGithub({commit}) {
+  providerGithub.addScope('repo');
+  providerGithub.setCustomParameters({
+    'allow_signup': 'false'
+  });
+  return firebaseAuth().signInWithPopup(providerGithub).then(function(result) {
     console.log(result);
   }).catch(function(error) {});
 };
