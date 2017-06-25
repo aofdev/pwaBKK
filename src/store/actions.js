@@ -38,7 +38,6 @@ export function loginWithGithub({commit}) {
 
 export function listenToPostList({commit}) {
   return db.ref("posts/").on('value', (posts) => {
-    console.log(posts.val());
     commit('UPDATE_POST_LIST', posts.val());
   });
 }
