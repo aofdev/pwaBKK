@@ -43,7 +43,7 @@ export function insertPost ({commit}, {id,topic,detail,created,userUid,image}) {
   const insert = {};
   insert['/posts/' + key] = posts;
 
-  return refdb.set(insert);
+  return refdb.update(insert);
 }
 
 export function updatePosts({commit}, {id,topic,detail,created,userUid,keyId,image}) {

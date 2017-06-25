@@ -27,6 +27,10 @@
               <div class="col-lg-10 col-lg-offset-2">
                 <button type="submit" class="btn btn-warning" @click.prevent="loginWithEmailLocal">Submit</button>
                 <button type="reset" class="btn btn-default">Clear</button>
+                <br/><br>
+                <a class="btn btn-block btn-social btn-google" @click.prevent="registerByGoogle">
+                  <span class="fa fa-google"></span> Sign in with Google
+                </a>
 
               </div>
             </div>
