@@ -24,10 +24,18 @@
                   </div>
                 </div>
                 <div class="form-group">
+
                   <div class="col-lg-10 col-lg-offset-2">
-                    <button type="submit" class="btn btn-warning" @click.prevent="editPosts">บันทึก</button>
+                    <img id="myimg" width="150" height="100" alt=""><br>
+                    <progress  value="0" max="100" id="uploader"></progress>
+                    <input accept="image/*" type="file" value="upload" @change="fileBtn(file, $event)">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-lg-10 col-lg-offset-2">
+                    <button type="submit" class="btn btn-warning" @click.prevent="editPosts">แก้ไข</button>
                     <button type="reset" class="btn btn-default">Clear</button>
-                    <button type="button" class="btn btn-danger pull-right" @click.prevent="deletePt">ลบ</button>
+                    <button type="button" class="btn btn-danger pull-right" @click.prevent="deletePt"><i class="fa fa-trash-o" aria-hidden="true"></i> ลบ</button>
 
                   </div>
                 </div>
@@ -43,19 +51,22 @@
 </template>
 
 <script>
+  import { firebaseStorage } from '../config/firebaseConfig';
   import { mapActions } from 'vuex';
   export default {
     data(){
       return {
         topic: this.$route.query.dataTopic,
-        detail:this.$route.query.dataDetail
+        detail: this.$route.query.dataDetail,
+        getNameImg: this.$route.query.dataImage,
+        upImage:''
       }
     },
-    computed:{
+    computed: {
       userName(){
-        if (this.$store.getters.currentUser.name){
+        if (this.$store.getters.currentUser.name) {
           return this.$store.getters.currentUser.name;
-        }else{
+        } else {
           return this.$store.getters.currentUser.email;
         }
       },
@@ -63,35 +74,96 @@
         return this.$store.getters.currentUser.uid;
       }
     },
-    methods:{
+    methods: {
       ...mapActions({
         updatePost: 'updatePosts',
-        deletePosts: 'deletePost'
+        deletePosts: 'deletePost',
+        delImageOld: 'deleteImageOld'
       }),
+      fileBtn: function (file, e) {
+        e.preventDefault();
+        const uploader = document.getElementById('uploader');
+        //get file
+        let getFile = e.target.files[0];
+        this.upImage = getFile.name;
+        //set storage ref
+        let storageRef =  firebaseStorage.ref('posts/'+ getFile.name);
+        //upload file
+        let task = storageRef.put(getFile);
+
+        task.on('state_changed',
+          function progress(snapshot) {
+            let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            uploader.value = percentage;
+          },
+          function error(err) {
+          },
+          function complete() {
+          }
+        );
+      },
       editPosts() {
-        const data = {
-          id: this.$route.params.id,
-          topic: this.topic,
-          detail: this.detail,
-          created: this.userName,
-          userUid:this.userId,
-          keyId: this.$route.query.dataKey
-        };
-        this.updatePost(data);
-        this.topic = '';
-        this.detail = '';
-        this.$router.push({name: 'Home'});
+          if (this.upImage !== ''){
+            const data = {
+              id: this.$route.params.id,
+              topic: this.topic,
+              detail: this.detail,
+              created: this.userName,
+              userUid: this.userId,
+              keyId: this.$route.query.dataKey,
+              image:this.upImage
+            };
+            const imageOld = {
+                image: this.getNameImg
+            };
+            this.delImageOld(imageOld);
+            this.updatePost(data);
+            this.topic = '';
+            this.detail = '';
+            this.upImage = '';
+            this.$router.push({name: 'Home'});
+          }else{
+            const data = {
+              id: this.$route.params.id,
+              topic: this.topic,
+              detail: this.detail,
+              created: this.userName,
+              userUid: this.userId,
+              keyId: this.$route.query.dataKey,
+              image:this.getNameImg
+            };
+            this.updatePost(data);
+            this.topic = '';
+            this.detail = '';
+            this.$router.push({name: 'Home'});
+          }
+
+
       },
       deletePt(){
         const data = {
-          keyId:this.$route.query.dataKey,
+          keyId: this.$route.query.dataKey,
           image: this.$route.query.dataImage
         };
         this.deletePosts(data);
         this.$router.push({name: 'Home'});
-      }
+      },
+    Image(){
+      let storageRef = firebaseStorage.ref('posts/' + this.getNameImg);
+      storageRef.getDownloadURL().then(function (url) {
+
+        const img = document.getElementById('myimg');
+        img.src = url;
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
+  },
+    created() {
+      this.Image();
     }
   }
+
 
 </script>
 

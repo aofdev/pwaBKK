@@ -43,25 +43,34 @@ export function insertPost ({commit}, {id,topic,detail,created,userUid,image}) {
   const insert = {};
   insert['/posts/' + key] = posts;
 
-  return refdb.update(insert);
+  return refdb.set(insert);
 }
 
-export function updatePosts({commit}, {id,topic,detail,created,userUid,keyId}) {
+export function updatePosts({commit}, {id,topic,detail,created,userUid,keyId,image}) {
   let posts = {
     id:id,
     topic:topic,
     detail:detail,
     created:created,
     userUid:userUid,
+    image: image,
     keyId: keyId
   };
-  return db.ref("posts/"+keyId).set(posts);
+  return db.ref("posts/"+keyId).update(posts);
 }
 
 export function deletePost({commit},{keyId,image}) {
   let storageRef = firebaseStorage.ref('posts/' + image);
   storageRef.delete().then(function() {
     return db.ref("posts/"+keyId).remove();
+  }).catch(function(error) {
+    console.log(error);
+  });
+}
+
+export function deleteImageOld({commit},{image}) {
+  let storageRef = firebaseStorage.ref('posts/' + image);
+  storageRef.delete().then(function() {
   }).catch(function(error) {
     console.log(error);
   });
