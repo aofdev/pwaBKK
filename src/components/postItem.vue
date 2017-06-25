@@ -38,7 +38,10 @@
             id: this.item.id
           },
           query: {
-            dataTopic: this.item.topic, dataDetail: this.item.detail, dataKey: this.item.keyId
+            dataTopic: this.item.topic,
+            dataDetail: this.item.detail,
+            dataKey: this.item.keyId,
+            dataImage: this.item.image
           }
         }
       }

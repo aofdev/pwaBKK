@@ -1,4 +1,4 @@
-import { db, firebaseAuth,providerGoogle } from '../config/firebaseConfig';
+import { db, firebaseAuth,providerGoogle,firebaseStorage } from '../config/firebaseConfig';
 
 
 export const registerByEmail = ({commit}, {email, password}) => {
@@ -58,6 +58,11 @@ export function updatePosts({commit}, {id,topic,detail,created,userUid,keyId}) {
   return db.ref("posts/"+keyId).set(posts);
 }
 
-export function deletePost({commit},{keyId}) {
-  return db.ref("posts/"+keyId).remove();
+export function deletePost({commit},{keyId,image}) {
+  let storageRef = firebaseStorage.ref('posts/' + image);
+  storageRef.delete().then(function() {
+    return db.ref("posts/"+keyId).remove();
+  }).catch(function(error) {
+    console.log(error);
+  });
 }

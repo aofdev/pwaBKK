@@ -84,7 +84,8 @@
       },
       deletePt(){
         const data = {
-          keyId:this.$route.query.dataKey
+          keyId:this.$route.query.dataKey,
+          image: this.$route.query.dataImage
         };
         this.deletePosts(data);
         this.$router.push({name: 'Home'});
