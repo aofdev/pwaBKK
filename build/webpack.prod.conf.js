@@ -71,7 +71,7 @@ var webpackConfig = merge(baseWebpackConfig, {
     new PreloadWebpackPlugin({
       rel: 'preload',
       as: 'script',
-      include: 'asyncChunks'
+      include: 'all'
     }),
     // split vendor js into its own file
     new webpack.optimize.CommonsChunkPlugin({

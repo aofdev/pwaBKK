@@ -24,6 +24,17 @@
     <!-- Add to home screen for Windows -->
     <meta name="msapplication-TileImage" content="/static/img/icons/msapplication-icon-144x144.png">
     <meta name="msapplication-TileColor" content="#ffffff">
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
+    <script>
+      var OneSignal = window.OneSignal || [];
+      OneSignal.push(["init", {
+        appId: "8e86143e-0052-4f0c-bb61-83b82b4525f4",
+        autoRegister: true,
+        notifyButton: {
+          enable: true /* Set to false to hide */
+        }
+      }]);
+    </script>
     <% for (var chunk of webpack.chunks) {
         for (var file of chunk.files) {
           if (file.match(/\.(js|css)$/)) { %>
