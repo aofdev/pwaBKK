@@ -1,5 +1,10 @@
 <template>
   <div>
+    <div  class="g-recaptcha"
+          data-sitekey="6LfncycUAAAAABhkI5S8YeyfK54W1HV0e8Kl4irt"
+          data-callback="onSubmit"
+          data-size="invisible">
+    </div>
     <nav class="navbar navbar-default">
       <div class="container">
         <div class="navbar-header">
@@ -38,10 +43,9 @@
   </div>
 </template>
 <script>
-
-
   import { mapActions } from 'vuex';
   export default {
+
     computed: {
       isLoggedInLocal() {
         return this.$store.getters.isLoggedIn;
@@ -69,7 +73,6 @@
     }
 
   }
-
 </script>
 
 <style>

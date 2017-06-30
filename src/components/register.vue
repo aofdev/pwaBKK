@@ -32,12 +32,12 @@
                       <span class="fa fa-google"></span> Sign in with Google
                     </a>
 
-                    <!--<a class="btn btn-block btn-social btn-facebook" @click.prevent="registerByFacebook">-->
-                      <!--<span class="fa fa-facebook"></span> Sign in with Facebook-->
-                    <!--</a>-->
-                    <!--<a class="btn btn-block btn-social btn-github" @click.prevent="registerByGithub">-->
-                      <!--<span class="fa fa-github"></span> Sign in with Github-->
-                    <!--</a>-->
+                    <a class="btn btn-block btn-social btn-facebook" @click.prevent="registerByFacebook">
+                      <span class="fa fa-facebook"></span> Sign in with Facebook
+                    </a>
+                    <a class="btn btn-block btn-social btn-github" @click.prevent="registerByGithub">
+                      <span class="fa fa-github"></span> Sign in with Github
+                    </a>
 
                   </div>
                 </div>
@@ -79,20 +79,20 @@
           console.log('login error', error);
         });
       },
-//      registerByFacebook(){
-//        this.$store.dispatch('loginWithFacebook').then((user) => {
-//          this.$router.push({name: 'Home'});
-//        }).catch((error) => {
-//          console.log('login error', error);
-//        });
-//      },
-//      registerByGithub(){
-//        this.$store.dispatch('loginWithGithub').then((user) => {
-//          this.$router.push({name: 'Home'});
-//        }).catch((error) => {
-//          console.log('login error', error);
-//        });
-//      }
+      registerByFacebook(){
+        this.$store.dispatch('loginWithFacebook').then((user) => {
+          this.$router.push({name: 'Home'});
+        }).catch((error) => {
+          console.log('login error', error);
+        });
+      },
+      registerByGithub(){
+        this.$store.dispatch('loginWithGithub').then((user) => {
+          this.$router.push({name: 'Home'});
+        }).catch((error) => {
+          console.log('login error', error);
+        });
+      }
     }
   }
 

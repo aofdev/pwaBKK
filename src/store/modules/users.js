@@ -3,14 +3,14 @@ import { firebaseAuth, firebaseListener } from '../../config/firebaseConfig';
 
 
 const state = {
-  isLoggedIn: firebaseAuth().currentUser != null,
-  user: firebaseAuth().currentUser,
+  isLoggedIn: firebaseAuth.currentUser != null,
+  user: firebaseAuth.currentUser,
 };
 
 const mutations = {
   'AUTH_STATUS_CHANGE' (state) {
-    state.isLoggedIn = firebaseAuth().currentUser != null;
-    state.user = firebaseAuth().currentUser;
+    state.isLoggedIn = firebaseAuth.currentUser != null;
+    state.user = firebaseAuth.currentUser;
   }
 };
 

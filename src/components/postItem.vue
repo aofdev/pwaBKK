@@ -3,7 +3,7 @@
     <div class="col-md-4">
       <div class="card">
         <div class="card-image">
-          <img :id="item.id" width="365" height="260px">
+          <img :id="item.id" width="100%" height="260px">
           <span class="card-title"><b>{{ item.topic }}</b></span>
         </div>
 
@@ -13,7 +13,13 @@
 
         <div class="card-action card-background">
           <a style="color: blueviolet" href="#" ><i class="fa fa-user-circle" aria-hidden="true"></i>
-            เขียนโดย: {{ item.created }}</a>
+             {{ item.created }}</a>
+          <!--<a href="" style="color: red" @click.prevent="likePost" v-if="isLoggedInLocal">-->
+          <!--<i class="fa fa-heart-o" aria-hidden="true"></i> {{ item.like.total }}-->
+          <!--</a>-->
+          <!--<span style="color: red" v-else="isLoggedInLocal">-->
+            <!--<i class="fa fa-heart-o" aria-hidden="true"></i> {{ item.like.total }}-->
+          <!--</span>-->
 
           <router-link :to="link" class="pull-right"  v-if="item.userUid == userId"><i class="fa fa-pencil" aria-hidden="true"></i>
               แก้ไข</router-link>
@@ -49,7 +55,11 @@
     computed: {
       userId(){
         return this.$store.getters.currentUser.uid;
-      }
+      },
+      isLoggedInLocal() {
+
+        return this.$store.getters.isLoggedIn;
+      },
     },
     methods: {
       Image(){
@@ -63,7 +73,20 @@
         }).catch(function (error) {
           console.log(error);
         });
-      }
+      },
+//      likePost(){
+//         const   likePush =  this.item.like.total +1;
+//         let like = {
+//           like: likePush,
+//           userUid:  this.userId,
+//           keyId:this.item.keyId
+//         };
+//        this.$store.dispatch('likePosts',like).then((user) => {
+//          this.$router.push({name: 'Home'});
+//        }).catch((error) => {
+//          console.log('login error', error);
+//        });
+//      }
     },
     created() {
       this.Image();

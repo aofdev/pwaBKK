@@ -6,6 +6,8 @@ import { firebaseListener } from './config/firebaseConfig';
 
 Vue.config.productionTip = false;
 
+
+
 firebaseListener(authStatusChange); //call auth
 
 /* eslint-disable no-new */
@@ -16,6 +18,8 @@ new Vue({
   template: '<App/>',
   components: { App }
 });
+
+
 
 function authStatusChange() {
   if (store) {

@@ -24,7 +24,7 @@ export function firebaseListener(func) {
 }
 
 export const db = firebase.database();
-export const firebaseAuth = firebase.auth;
+export const firebaseAuth = firebase.auth();
 export const providerGoogle = new firebase.auth.GoogleAuthProvider();
 export const providerFacebook = new firebase.auth.FacebookAuthProvider();
 export const providerGithub = new firebase.auth.GithubAuthProvider();
