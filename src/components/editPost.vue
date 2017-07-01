@@ -165,7 +165,7 @@
         this.$router.push({name: 'Home'});
       },
     Image(){
-      let storageRef = firebaseStorage.ref('posts/' + this.getNameImg);
+      let storageRef = firebaseStorage.ref('posts/thumb_'+this.getNameImg);
       storageRef.getDownloadURL().then(function (url) {
 
         const img = document.getElementById('myimg');

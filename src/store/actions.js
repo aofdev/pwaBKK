@@ -158,6 +158,8 @@ export function updatePosts({commit}, {id,topic,detail,created,userUid,keyId,ima
 export function deletePost({commit},{keyId,image}) {
   let storageRef = firebaseStorage.ref('posts/' + image);
   storageRef.delete().then(function() {
+    let storageRefResize = firebaseStorage.ref('posts/thumb_' + image);
+    storageRefResize.delete();
     return db.ref("posts/"+keyId).remove();
   }).catch(function(error) {
     console.log(error);
@@ -167,6 +169,8 @@ export function deletePost({commit},{keyId,image}) {
 export function deleteImageOld({commit},{image}) {
   let storageRef = firebaseStorage.ref('posts/' + image);
   storageRef.delete().then(function () {
+    let storageRefResize = firebaseStorage.ref('posts/thumb_' + image);
+    storageRefResize.delete();
   }).catch(function (error) {
     console.log(error);
   });

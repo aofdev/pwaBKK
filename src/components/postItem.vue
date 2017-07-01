@@ -65,7 +65,7 @@
       Image(){
         const str = this.item.id.toString();
         //console.log(str);
-        let storageRef = firebaseStorage.ref('posts/' + this.getNameImg);
+        let storageRef = firebaseStorage.ref('posts/thumb_' + this.getNameImg);
         storageRef.getDownloadURL().then(function (url) {
 
           const img = document.getElementById(str);
