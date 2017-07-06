@@ -1,7 +1,7 @@
 <template>
   <div>
     <div  class="g-recaptcha"
-          data-sitekey="6LfncycUAAAAABhkI5S8YeyfK54W1HV0e8Kl4irt"
+          data-sitekey="6LfZGigUAAAAAM8vqr68kgBoZrPwuscUuNSDibyA"
           data-callback="onSubmit"
           data-size="invisible">
     </div>

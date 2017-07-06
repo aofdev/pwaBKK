@@ -23,6 +23,11 @@
 
           <router-link :to="link" class="pull-right"  v-if="item.userUid == userId"><i class="fa fa-pencil" aria-hidden="true"></i>
               แก้ไข</router-link>
+
+            <div>
+            <p v-for="label in item.labels" style="margin-left: 2px;" class="label label-primary">{{label}}</p>
+          </div>
+
         </div>
       </div>
       <br>
