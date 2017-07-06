@@ -13,14 +13,14 @@
 
         <div class="card-action card-background">
           <a style="color: blueviolet" href="#" ><i class="fa fa-user-circle" aria-hidden="true"></i>
-            เขียนโดย: {{ item.created }}</a>
+            {{ item.created }}</a>
 
           <router-link :to="link" class="pull-right"><i class="fa fa-pencil" aria-hidden="true"></i>
-            แก้ไข</router-link>
+            edit</router-link>
 
-          <div>
+<div>
             <p v-for="label in item.labels" style="margin-left: 2px;" class="label label-primary">{{label}}</p>
-          </div>
+</div>
         </div>
       </div>
       <br>
@@ -94,7 +94,6 @@
     color:#fff;
     font-size: 26px;
     font-weight: 300;
-    text-transform: uppercase;
   }
 
   .card .card-image {
@@ -134,7 +133,6 @@
     color: #ffab40;
     margin-right: 16px;
     transition: color 0.3s ease;
-    text-transform: uppercase;
   }
   .card .card-action a:hover {
     color: #ffd8a6;

@@ -1,10 +1,6 @@
 <template>
   <div>
-    <div  class="g-recaptcha"
-          data-sitekey="6LfZGigUAAAAAM8vqr68kgBoZrPwuscUuNSDibyA"
-          data-callback="onSubmit"
-          data-size="invisible">
-    </div>
+
     <nav class="navbar navbar-default">
       <div class="container">
         <div class="navbar-header">
@@ -14,13 +10,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/"><b>Post Short</b></a>
+          <a class="navbar-brand" href="/"><b style="color: orange">Post Short</b></a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
-            <router-link to="/createPost" activeClass="active" tag="li" v-if="isLoggedInLocal"><a><i class="fa fa-pencil-square-o" aria-hidden="true"></i> เขียนโฟส</a></router-link>
-            <router-link to="/watchMe" activeClass="active" tag="li" v-if="isLoggedInLocal"><a><i class="fa fa-sticky-note" aria-hidden="true"></i> ดูโฟสเรา</a></router-link>
+            <router-link to="/createPost" activeClass="active" tag="li" v-if="isLoggedInLocal"><a><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Create Post</a></router-link>
+            <router-link to="/watchMe" activeClass="active" tag="li" v-if="isLoggedInLocal"><a><i class="fa fa-sticky-note" aria-hidden="true"></i> Post Me</a></router-link>
             <router-link to="/login" activeClass="active" tag="li" v-if="!isLoggedInLocal"><a><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></router-link>
             <router-link to="/register" activeClass="active" tag="li" v-if="!isLoggedInLocal"><a><i class="fa fa-registered" aria-hidden="true"></i> Register</a></router-link>
             <li class="dropdown" v-if="isLoggedInLocal">
