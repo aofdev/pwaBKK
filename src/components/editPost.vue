@@ -24,6 +24,16 @@
                   </div>
                 </div>
                 <div class="form-group">
+                  <label for="textarea" class="col-lg-2 control-label">Analyze images</label>
+                  <div class="col-lg-10">
+                    <select class="form-control"
+                            v-model="analyze"
+                    >
+                      <option v-for="modes in mode">{{ modes }}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
 
                   <div class="col-lg-10 col-lg-offset-2">
                     <img id="myimg" width="150" height="100" alt=""><br>
@@ -78,7 +88,9 @@
         topic: this.$route.query.dataTopic,
         detail: this.$route.query.dataDetail,
         getNameImg: this.$route.query.dataImage,
-        upImage:''
+        upImage:'',
+        analyze:this.$route.query.dataAnalyze,
+        mode:['Labels','Faces']
       }
     },
     computed: {
@@ -131,7 +143,8 @@
               created: this.userName,
               userUid: this.userId,
               keyId: this.$route.query.dataKey,
-              image:this.upImage
+              image:this.upImage,
+              analyze:this.analyze
             };
             const imageOld = {
                 image: this.getNameImg
@@ -150,7 +163,8 @@
               created: this.userName,
               userUid: this.userId,
               keyId: this.$route.query.dataKey,
-              image:this.getNameImg
+              image:this.getNameImg,
+              analyze:this.analyze
             };
             this.updatePost(data);
             this.topic = '';

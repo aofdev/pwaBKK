@@ -45,7 +45,8 @@
             dataTopic: this.item.topic,
             dataDetail: this.item.detail,
             dataKey: this.item.keyId,
-            dataImage: this.item.image
+            dataImage: this.item.image,
+            dataAnalyze: this.item.analyze,
           }
         }
       }

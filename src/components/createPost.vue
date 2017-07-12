@@ -23,6 +23,18 @@
                     <textarea type="password" class="form-control" id="textarea" placeholder="detail" maxlength="150" v-model="detail"></textarea>
                   </div>
                 </div>
+
+                <div class="form-group">
+                  <label for="textarea" class="col-lg-2 control-label">Analyze images</label>
+                  <div class="col-lg-10">
+                    <select class="form-control"
+                            v-model="analyze"
+                    >
+                      <option v-for="modes in mode">{{ modes }}</option>
+                    </select>
+                  </div>
+                </div>
+
                 <div class="form-group">
 
                   <div class="col-lg-10 col-lg-offset-2">
@@ -59,7 +71,9 @@
       return {
         topic: '',
         detail: '',
-        image:''
+        image:'',
+        analyze:'Labels',
+        mode:['Labels','Faces']
       }
     },
     computed:{
@@ -108,7 +122,8 @@
           detail: this.detail,
           created: this.userName,
           userUid: this.userId,
-          image: this.image
+          image: this.image,
+          analyze: this.analyze
         };
         this.$store.dispatch('insertPost', posts).then((posts) => {
 

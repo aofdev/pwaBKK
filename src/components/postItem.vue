@@ -3,7 +3,8 @@
     <div class="col-md-4">
       <div class="card">
         <div class="card-image">
-          <img :id="item.id" width="100%" height="260px">
+          <ScaleLoader v-if="!loadImage" style="left:45%;top: 45%;position: absolute"></ScaleLoader>
+          <img  :id="item.id" width="100%" height="260px">
           <span class="card-title"><b>{{ item.topic }}</b></span>
         </div>
 
@@ -24,8 +25,16 @@
           <router-link :to="link" class="pull-right"  v-if="item.userUid == userId"><i class="fa fa-pencil" aria-hidden="true"></i>
               edit</router-link>
 
-<div>
-            <p v-for="label in item.labels" style="margin-left: 2px;" class="label label-primary">{{label}}</p>
+<div >
+  <span v-if="item.labels == null">
+      <center>
+  <BeatLoader></BeatLoader>
+  </center>
+  </span>
+  <span v-else>
+     <p v-for="label in item.labels" style="margin-left: 2px;" class="label label-primary">{{label}}</p>
+  </span>
+
 
 </div>
         </div>
@@ -36,11 +45,14 @@
 </template>
 
 <script>
+  import ScaleLoader from './Loading/ScaleLoader.vue';
+  import BeatLoader from './Loading/BeatLoader.vue'
   import { firebaseStorage } from '../config/firebaseConfig';
   export default{
     props: ['item'],
     data(){
       return {
+        loadImage:false,
         getNameImg: this.item.image,
         getIdElm: this.item.id,
         link: {
@@ -52,7 +64,8 @@
             dataTopic: this.item.topic,
             dataDetail: this.item.detail,
             dataKey: this.item.keyId,
-            dataImage: this.item.image
+            dataImage: this.item.image,
+            dataAnalyze: this.item.analyze,
           }
         }
       }
@@ -75,6 +88,8 @@
 
           const img = document.getElementById(str);
           img.src = url;
+        }).then(() =>{
+            this.loadImage = true;
         }).catch(function (error) {
           console.log(error);
         });
@@ -95,6 +110,10 @@
     },
     created() {
       this.Image();
+    },
+    components:{
+      BeatLoader:BeatLoader,
+      ScaleLoader:ScaleLoader
     }
   }
 
