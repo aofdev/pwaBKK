@@ -18,9 +18,53 @@
           <router-link :to="link" class="pull-right"><i class="fa fa-pencil" aria-hidden="true"></i>
             edit</router-link>
 
-<div>
-            <p v-for="label in item.labels" style="margin-left: 2px;" class="label label-primary">{{label}}</p>
-</div>
+
+          <div>
+  <span v-if="item.analyze == 'Labels'">
+  <span v-if="item.labels == null">
+      <center>
+  <BeatLoader></BeatLoader>
+  </center>
+  </span>
+  <span v-else>
+     <p v-for="label in item.labels" style="margin-left: 2px;" class="label label-primary">{{label}}</p>
+  </span>
+    </span>
+            <span v-if="item.analyze == 'Faces'">
+    <span v-if="item.faces == null">
+          <center>
+  <BeatLoader></BeatLoader>
+  </center>
+    </span>
+  <span v-else>
+        <ul>
+          <li>joy:  <span style="color: red"> {{ item.faces.joy }}</span></li>
+          <li>sorrow: <span style="color: red"> {{ item.faces.sorrow }}</span></li>
+          <li>anger: <span style="color: red"> {{ item.faces.anger }}</span></li>
+          <li>surprise: <span style="color: red"> {{ item.faces.surprise }}</span></li>
+          <li>underExposed: <span style="color: red"> {{ item.faces.underExposed }}</span></li>
+          <li>blurred: <span style="color: red"> {{ item.faces.blurred }}</span></li>
+          <li>headwear: <span style="color: red"> {{ item.faces.headwear }}</span></li>
+        </ul>
+      <p>confidence: <span style="color: red"> {{ item.faces.confidence }}</span></p>
+    </span>
+    </span>
+
+            <span v-if="item.analyze == 'Text'">
+    <span v-if="item.text == null">
+                <center>
+  <BeatLoader></BeatLoader>
+  </center>
+    </span>
+  <span v-else>
+     <ul v-for="text in item.text">
+       <li>{{ text }}</li>
+     </ul>
+    </span>
+    </span>
+
+
+          </div>
         </div>
       </div>
       <br>

@@ -13,8 +13,12 @@
               <fieldset>
                 <div class="form-group">
                   <label for="inputPost" class="col-lg-2 control-label">name</label>
-                  <div class="col-lg-10">
+                  <div class="col-lg-9">
                     <input type="text" class="form-control" id="inputPost" placeholder="name" maxlength="30" v-model="topic">
+                  </div>
+                  <div class="col-lg-1 pull-right">
+                    <a class="btn btn-default" v-if="mic == false" @click.prevent="startSpeech"><i class="fa fa-microphone" aria-hidden="true"></i></a>
+                    <a class="btn btn-default" v-if="mic == true" @click.prevent="stopSpeech"><i class="fa fa-stop" aria-hidden="true"></i></a>
                   </div>
                 </div>
                 <div class="form-group">
@@ -25,7 +29,7 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="textarea" class="col-lg-2 control-label">Analyze images</label>
+                  <label for="textarea" class="col-lg-2 control-label">Analyze</label>
                   <div class="col-lg-10">
                     <select class="form-control"
                             v-model="analyze"
@@ -65,6 +69,7 @@
 </template>
 
 <script>
+  let recognition;
   import { firebaseStorage } from '../config/firebaseConfig';
   export default {
     data(){
@@ -72,8 +77,9 @@
         topic: '',
         detail: '',
         image:'',
+        mic:false,
         analyze:'Labels',
-        mode:['Labels','Faces']
+        mode:['Labels','Faces','Text']
       }
     },
     computed:{
@@ -131,6 +137,36 @@
         }).catch((error) => {
           console.log('insert error', error);
         });
+      },
+      startSpeech () {
+        recognition.start();
+        this.mic = true;
+      },
+      stopSpeech(){
+        recognition.stop();
+        this.mic = false;
+      }
+    },
+    created() {
+      recognition = new webkitSpeechRecognition();
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      recognition.lang = 'en-US';
+
+      recognition.onresult = event => {
+        let interim_transcript = '';
+        for (let i = event.resultIndex; i < event.results.length; ++i) {
+          if (event.results[i].isFinal) {
+            this.topic += event.results[i][0].transcript;
+            this.mic = false;
+          } else {
+            interim_transcript += event.results[i][0].transcript;
+          }
+
+        }
+      };
+      recognition.onspeechend = () => {
+      this.mic = false;
       }
     }
   }

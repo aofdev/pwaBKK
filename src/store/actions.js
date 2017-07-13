@@ -15,13 +15,11 @@ export function loginWithEmail ({commit}, {email, password}) {
 
 export function loginWithGoogle({commit}) {
  return firebaseAuth.signInWithPopup(providerGoogle).then(function(result) {
-    console.log(result);
   }).catch(function(error) {});
 }
 
 export function loginWithFacebook({commit}) {
   return firebaseAuth.signInWithPopup(providerFacebook).then(function(result) {
-    console.log(result);
   }).catch(function(error) {
     console.log('facebook fail '+error);
   });
@@ -33,7 +31,6 @@ export function loginWithGithub({commit}) {
     'allow_signup': 'false'
   });
   return firebaseAuth.signInWithPopup(providerGithub).then(function(result) {
-    console.log(result);
   }).catch(function(error) {
     console.log('github fail '+error);
   });
