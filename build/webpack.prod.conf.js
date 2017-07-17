@@ -107,7 +107,21 @@ var webpackConfig = merge(baseWebpackConfig, {
       filename: 'service-worker.js',
       staticFileGlobs: ['dist/**/*.{js,html,css}'],
       minify: true,
-      stripPrefix: 'dist/'
+      stripPrefix: 'dist/',
+      runtimeCaching: [
+        {
+          urlPattern: /^https:\/\/firebasestorage\.googleapis\.com\/v0\/b\/test-sw-1587c\.appspot\.com\/o\//,
+          handler: 'networkFirst'
+        },
+        {
+          urlPattern: /^https:\/\/fonts\.googleapis\.com\//,
+          handler: 'cacheFirst'
+        },
+        {
+          urlPattern: /^https:\/\/cdnjs\.cloudflare\.com\//,
+          handler: 'cacheFirst'
+        }
+      ]
     })
   ]
 })
